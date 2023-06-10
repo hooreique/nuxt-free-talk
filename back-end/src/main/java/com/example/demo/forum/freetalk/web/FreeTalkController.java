@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/free-talk")
+@RequestMapping("/api/forum/free-talk")
 @RequiredArgsConstructor
 public class FreeTalkController {
 

@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.stream.IntStream;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
@@ -60,5 +62,30 @@ public class FreeTalkTest {
                 .build());
         assertNotNull(commentC);
         log.debug("Saved child comment id: {}", commentC.getId());
+    }
+
+    @Test
+    void insert() {
+        IntStream.rangeClosed(1, 30).forEach(i -> {
+            final Member member = memberRepository.save(Member.builder()
+                    .name("사용자_이름_" + i)
+                    .build());
+            final FreeTalkPost post = freeTalkPostRepository.save(FreeTalkPost.builder()
+                    .author(member)
+                    .title("글_제목_" + i)
+                    .content("글_내용_" + i)
+                    .build());
+            final FreeTalkComment commentP = freeTalkCommentRepository.save(FreeTalkComment.builder()
+                    .author(member)
+                    .post(post)
+                    .content("부모_댓글_내용_" + i)
+                    .build());
+            final FreeTalkComment commentC = freeTalkCommentRepository.save(FreeTalkComment.builder()
+                    .author(member)
+                    .post(post)
+                    .parent(commentP)
+                    .content("자식_댓글_내용_" + i)
+                    .build());
+        });
     }
 }
