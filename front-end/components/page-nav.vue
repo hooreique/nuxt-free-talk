@@ -12,9 +12,14 @@ const {
 ]);
 
 const navLen = navLength > 0 ? navLength : 1;
+const pageCount = totalPages > 0 ? totalPages : 1;
 
-const navCount = Math.ceil(totalPages / navLen);
-const lastNavLength = ((totalPages - 1) % navLen) + 1;
+if (number >= pageCount) {
+  setPageNo(pageCount - 1);
+}
+
+const navCount = Math.ceil(pageCount / navLen);
+const lastNavLength = ((pageCount - 1) % navLen) + 1;
 
 const navNo = Math.floor(number / navLen);
 const lastNavNo = navCount - 1;
@@ -39,32 +44,37 @@ const numbers = computed(() => {
   <nav>
     <ul>
       <li>
-        <button @click.prevent.stop="() => setPageNo(0)" :disabled="number === 0">
+        <button @click.prevent.stop="() => setPageNo(0)"
+                :disabled="number === 0">
           1
         </button>
       </li>
       <li>
-        <button @click.prevent.stop="() => setPageNo(endNoOfPrev)" :disabled="isFirstNav">
+        <button @click.prevent.stop="() => setPageNo(endNoOfPrev)"
+                :disabled="isFirstNav">
           {{ isFirstNav ? '-' : endNoOfPrev + 1 }}
         </button>
       </li>
       <li>
         <ul>
           <li v-for="n in numbers" :key="n">
-            <button @click.prevent.stop="() => setPageNo(n)" :disabled="n === number">
+            <button @click.prevent.stop="() => setPageNo(n)"
+                    :disabled="n === number">
               {{ n + 1 }}
             </button>
           </li>
         </ul>
       </li>
       <li>
-        <button @click.prevent.stop="() => setPageNo(startNoOfNext)" :disabled="isLastNav">
+        <button @click.prevent.stop="() => setPageNo(startNoOfNext)"
+                :disabled="isLastNav">
           {{ isLastNav ? '-' : startNoOfNext + 1 }}
         </button>
       </li>
       <li>
-        <button @click.prevent.stop="() => setPageNo(totalPages - 1)" :disabled="number === totalPages - 1">
-          {{ totalPages }}
+        <button @click.prevent.stop="() => setPageNo(pageCount - 1)"
+                :disabled="number === pageCount - 1">
+          {{ pageCount }}
         </button>
       </li>
     </ul>
