@@ -13,6 +13,6 @@ spring:
 logging:
   level:
     com.example.demo: debug
-    org.hibernate.sql: debug
+    org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql: trace
     org.springframework.web: debug
