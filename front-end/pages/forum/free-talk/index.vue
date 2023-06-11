@@ -10,7 +10,7 @@ const setPageNo = number => useRouter().push({query: {...query, page: number}});
 
 const {data} = await useFetch('/forum/free-talk', {
   method: 'GET',
-  baseURL: 'http://localhost:8080/api',
+  baseURL: 'http://127.0.0.1:3333/api',
   query,
 });
 </script>
@@ -18,7 +18,8 @@ const {data} = await useFetch('/forum/free-talk', {
 <template>
   <NuxtLayout>
     <NuxtLayout name="forum">
-      <div v-if="data.totalElements === 0">Empty!</div>
+      <div v-if="!data">Data Falsy!</div>
+      <div v-else-if="data.totalElements === 0">Empty!</div>
       <div v-else>
         <PageNav :number="data.number" :total-pages="data.totalPages"
                  :set-page-no="setPageNo" :nav-length="10"/>
