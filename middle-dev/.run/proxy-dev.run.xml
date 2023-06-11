@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="proxy-dev" type="NodeJSConfigurationType" path-to-js-file="server.mjs" working-dir="$PROJECT_DIR$/middle-dev">
+    <method v="2" />
+  </configuration>
+</component>

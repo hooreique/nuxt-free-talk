@@ -1,4 +1,6 @@
-*
+/*
+
 !/.gitignore
 !/package.json
 !/server.mjs
+!/.run/
